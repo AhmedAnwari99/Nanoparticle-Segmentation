@@ -142,8 +142,7 @@ class NanoParticleSegmentation:
                 gray_img, filled_mask, seg_img = self.segment(gray_img)
                 img_save_path = os.path.join(self.save_dir, file_name)
                 self.display_img(gray_img, filled_mask, seg_img, true_mask, img_save_path)
-                break
-
+                
 
 
 if __name__ == "__main__":
