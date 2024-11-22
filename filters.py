@@ -1,5 +1,5 @@
 import cv2 
-
+import math
 
 def sobel_filter(image):
     #Sobel Edge filter for enhancement of edges
