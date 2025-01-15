@@ -1,3 +1,3 @@
-images_dir: "C:/Users/penda/Documents/Study Materials/Image Processing/PROJECT/PROJECT DATASET/data/images"
-masks_dir: "C:/Users/penda/Documents/Study Materials/Image Processing/PROJECT/PROJECT DATASET/data/masks"
+images_dir: "C:/Users/penda/Documents/Study Materials/Image Processing/PROJECT/PROJECT DATASET/Images"
+masks_dir: "C:/Users/penda/Documents/Study Materials/Image Processing/PROJECT/PROJECT DATASET/Masks"
 save_dir: "C:/Users/penda/Documents/Study Materials/Image Processing/PROJECT/Nanoparticle-Segmentation/results"
