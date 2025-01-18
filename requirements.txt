@@ -1,4 +1,6 @@
 numpy
 matplotlib
 pyyaml
+natsort
+scipy
 opencv-python

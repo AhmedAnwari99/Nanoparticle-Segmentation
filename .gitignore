@@ -3,6 +3,8 @@
 
 # Tests
 results
+results_gaussian
+results_median
 
 ### Python ###
 # Byte-compiled / optimized / DLL files

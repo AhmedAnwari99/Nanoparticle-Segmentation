@@ -82,9 +82,12 @@ class NanoParticleSegmentation:
         return largest_cent_contour
 
     def segment(self, gray_img):        
-        # Apply Gaussian Blur to reduce noise
+        Apply Gaussian Blur to reduce noise
         blurred = cv2.GaussianBlur(gray_img, (5, 5), 0)
-        
+
+        # # Apply Median Blur to reduce noise
+        # blurred = cv2.medianBlur(gray_img, 5)
+
         # Thresholding using the mean value
         _, thresh = cv2.threshold(blurred, np.mean(blurred), 255, cv2.THRESH_BINARY_INV)
         
