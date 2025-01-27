@@ -34,7 +34,8 @@ def process(config_path="./config.yaml"):
         gray_img = nano_particle_segmentor.get_gray_img(img_path)
         true_mask = cv2.imread(mask_path, cv2.IMREAD_GRAYSCALE)
 
-        gray_img, filled_mask, seg_img = nano_particle_segmentor.segment(gray_img)
+        # gray_img, filled_mask, seg_img = nano_particle_segmentor.segment(gray_img)
+        gray_img, filled_mask, seg_img = nano_particle_segmentor.segment(gray_img, strategy=2)
 
         metrics_generator = Metrics(filled_mask, true_mask)
         metrics = metrics_generator.get_metrics()

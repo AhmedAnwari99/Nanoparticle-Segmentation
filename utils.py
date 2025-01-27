@@ -81,23 +81,39 @@ class NanoParticleSegmentation:
 
         return largest_cent_contour
 
-    def segment(self, gray_img):        
-        # Apply Gaussian Blur to reduce noise
-        blurred = cv2.GaussianBlur(gray_img, (5, 5), 0)
+    def segment(self, gray_img, strategy=1):
+        # Silas' strategy
+        if strategy == 1:       
+            # Apply Gaussian Blur to reduce noise
+            blurred = cv2.GaussianBlur(gray_img, (5, 5), 0)
 
-        # # Apply Median Blur to reduce noise
-        # blurred = cv2.medianBlur(gray_img, 5)
+            # Apply Median Blur to reduce noise
+            blurred = cv2.medianBlur(gray_img, 5)
 
-        # Thresholding using the mean value
-        _, thresh = cv2.threshold(blurred, np.mean(blurred), 255, cv2.THRESH_BINARY_INV)
-        
-        # Apply Morphological Opening to remove small patches
-        kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))
-        opened = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, kernel, iterations=2)
-        
+            # Thresholding using the mean value
+            _, thresh = cv2.threshold(blurred, np.mean(blurred), 255, cv2.THRESH_BINARY_INV)
+            
+            # Apply Morphological Opening to remove small patches
+            kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))
+            opened = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, kernel, iterations=2)
+
+        else:
+            # Ahmed's strategy
+            #Apply Median blur to remove salt and pepper noise
+            blurred = cv2.medianBlur(gray_img, 9)
+
+            #Thresholding to seperate particle from the background
+            _, thresh_otsu = cv2.threshold(blurred, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
+
+            # Apply morphologicla operations
+            kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))
+            closed = cv2.morphologyEx(thresh_otsu, cv2.MORPH_CLOSE, kernel, iterations=3)
+
+            kernel2 = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5))
+            opened = cv2.morphologyEx(closed, cv2.MORPH_OPEN, kernel2, iterations=3)
+
         # Find contours in the processed image
-        contours, hierarchy = cv2.findContours(opened, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-    
+        contours, _ = cv2.findContours(opened, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         largest_cent_contour = self.sort_contours(contours)
         
         # Create a blank mask and draw the largest contour
