@@ -1,31 +1,3 @@
 # Nanoparticle Segmentation
 
-Clone this repo and cd into it
-
-Create a Virtual environment.
-```
-python -m venv venv
-```
-
-Activate Virtual environment
-
-Windows
-```
-venv\scripts\activate
-```
-Linux
-```
-source/venv/bin/activate
-```
-
-Install requirements
-```
-pip install -r requirements.txt
-```
-
-Edit config.yaml file with appropriate paths
-
-Run segmentation script
-```
-python segment.py
-```
+![image](https://github.com/user-attachments/assets/e60fc6f0-9d2c-408d-8d98-69023f3b3fa6)
